@@ -1,0 +1,676 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+ <head>
+
+ <meta charset="utf-8"/>
+
+ <title>
+
+ Fauna Resume Builder
+
+ </title>
+
+ <link href="{% static './style.css' %}" rel="stylesheet"/>
+
+ </head>
+
+ <body>
+
+ <!-- partial:index.partial.html -->
+
+ <div id="javascript_header">
+
+ </div>
+
+ <form method="POST">
+
+ {% csrf_token %}
+
+ <ul class="messages">
+
+ {% for message in messages %}
+
+ <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color:red;">{{ message }}</li>
+
+ {% endfor %}
+
+ </ul>
+
+ <div class="form__header">
+
+ <h1>
+
+ Build Your Resume
+
+ </h1>
+
+ <p>
+
+ Enter the fields below to generate a resume file.
+
+ </p>
+
+ </div>
+
+ <h2>
+
+ Personal Details
+
+ </h2>
+
+ <div class="form-group">
+
+ <label for="name">
+
+ Full Name
+
+ <span>
+
+ *
+
+ </span>
+
+ </label>
+
+ <input id="name" name="name" value="{{resume_info.full_name}}" type="text"/>
+
+ <div class="error" id="name__error">
+
+ </div>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="address">
+
+ Address
+
+ </label>
+
+ <input id="address" name="address" value="{{resume_info.address}}" type="text"/>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="phone">
+
+ Phone
+
+ </label>
+
+ <input id="phone" name="phone" value="{{resume_info.phone}}" type="text"/>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="email">
+
+ Email
+
+ <span>
+
+ *
+
+ </span>
+
+ </label>
+
+ <input id="email" name="email" value="{{resume_info.email}}" type="email"/>
+
+ <div class="error" id="email__error">
+
+ </div>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="about">
+
+ About You
+
+ </label>
+
+ <textarea id="about" name="about" placeholder="{{resume_info.about_you}}"></textarea>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="career">
+
+ Career Objectives
+
+ </label>
+
+ <textarea id="career" name="career" placeholder="{{resume_info.career}}"></textarea>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="education">
+
+ Education
+
+ </label>
+
+ <textarea id="education" name="education" placeholder="{{resume_info.education}}"></textarea>
+
+ </div>
+
+ <div class="line-break">
+
+ </div>
+
+ <h2>
+
+ Work Experience
+
+ </h2>
+
+ <h3>
+
+ Most Recent Job
+
+ </h3>
+
+ <div class="form-date-group">
+
+ <div class="form-group">
+
+ <label for="job-1__start">
+
+ Start Date
+
+ </label>
+
+ <input id="job-1__start" name="job-1__start" value="{{resume_info.job_1__start}}" type="date"/>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="job-1__end">
+
+ End Date
+
+ </label>
+
+ <input id="job-1__end" name="job-1__end" value="{{resume_info.job_1__end}}" type="date"/>
+
+ </div>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="job-1__details">
+
+ Position Details
+
+ </label>
+
+ <textarea id="job-1__details" name="job-1__details" placeholder="{{resume_info.job_1__details}}"></textarea>
+
+ </div>
+
+ <div class="line-break">
+
+ </div>
+
+ <h3>
+
+ Past Job
+
+ </h3>
+
+ <div class="form-date-group">
+
+ <div class="form-group">
+
+ <label for="job-2__start">
+
+ Start Date
+
+ </label>
+
+ <input id="job-2__start" name="job-2__start" value="{{resume_info.job_2__start}}" type="date"/>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="job-2__end">
+
+ End Date
+
+ </label>
+
+ <input id="job-2__end" name="job-2__end" value="{{resume_info.job_2__end}}" type="date"/>
+
+ </div>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="job-2__details">
+
+ Position Details
+
+ </label>
+
+ <textarea id="job-2__details" name="job-2__details" placeholder="{{resume_info.job_2__details}}"></textarea>
+
+ </div>
+
+ <div class="line-break">
+
+ </div>
+
+ <h3>
+
+ Another Past Job
+
+ </h3>
+
+ <div class="form-date-group">
+
+ <div class="form-group">
+
+ <label for="job-3__start">
+
+ Start Date
+
+ </label>
+
+ <input id="job-3__start" name="job-3__start" value="{{resume_info.job_3__start}}" type="date"/>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="job-3__end">
+
+ End Date
+
+ </label>
+
+ <input id="job-3__end" name="job-3__end" value="{{resume_info.job_3__end}}" type="date"/>
+
+ </div>
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="job-3__details">
+
+ Position Details
+
+ </label>
+
+ <textarea id="job-3__details" name="job-3__details" placeholder="{{resume_info.job_3__details}}"></textarea>
+
+ </div>
+
+ <div class="line-break">
+
+ </div>
+
+ <div class="form-group">
+
+ <label for="references">
+
+ References
+
+ </label>
+
+ <textarea id="references" name="references" placeholder="{{resume_info.references}}"></textarea>
+
+ </div>
+
+ <div class="line-break">
+
+ </div>
+
+ <input type="submit" value="Submit Info"/>
+
+ <br>
+
+ <a class="button"style="background-color:red;" href="index">Back to home</a>
+
+ </form>
+
+ <!-- partial -->
+
+ <script src="{% static './script.js' %}">
+
+ </script>
+
+ </body>
+
+</html>
+
+The Resume Page
+The resume page is where the generated resume generated would be displayed for the user to view. To achieve this page, I created a new file resume.html and added the code below:
+
+<html>
+
+<head>
+
+ <title>{% if resume_info.full_name %}{{resume_info.full_name}}'s Resume {% endif %}</title>
+
+ <style>
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap');
+
+body {
+
+ font-family: 'Poppins', sans-serif;
+
+ background: #fafafa;
+
+ color: rgba(0,0,0,0.75);
+
+}
+
+h1 {
+
+ color: rgba(0,0,0,0.9);
+
+}
+
+h1, p {
+
+ box-sizing: border-box;
+
+ margin: 0px;
+
+ padding: 0px 24px;
+
+}
+
+.line-break {
+
+ width: 100%;
+
+ height: 1px;
+
+ margin: 16px auto;
+
+ border-bottom: 1px solid #eee;
+
+}
+
+.resume {
+
+ border-radius: 8px;
+
+ box-sizing: border-box;
+
+ display: flex;
+
+ flex-direction: column;
+
+ max-width: 800px;
+
+ margin: 48px auto;
+
+ padding: 16px 0px;
+
+ background: white;
+
+ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.14);
+
+}
+
+.resume-group {
+
+ box-sizing: border-box;
+
+ padding: 8px 0px;
+
+ width: 100%;
+
+ display: flex;
+
+ border-left: 3px solid transparent;
+
+ transition: 0.2s;
+
+}
+
+.resume-group:hover {
+
+ border-left: 3px solid #64FFDA;
+
+}
+
+.left-col {
+
+ width: 35%;
+
+}
+
+.right-col {
+
+ width: 65%;
+
+}
+
+.instructions {
+
+ opacity: 0.5;
+
+ text-align: center;
+
+ font-size: 0.8rem;
+
+ margin: 16px auto;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+ <div class="resume">
+
+ {% if resume_info.full_name %}
+
+ <h1>{{resume_info.full_name}}</h1>
+
+ {% endif %}
+
+ {% if resume_info.email %}
+
+ <p>{{resume_info.email}}</p>
+
+ {% endif %}
+
+ {% if resume_info.phone %}
+
+ <p>{{resume_info.phone}}</p>
+
+ {% endif %}
+
+ {% if resume_info.address %}
+
+ <p>{{resume_info.address}}</p>
+
+ {% endif %}
+
+ <div class="line-break"></div>
+
+ {% if resume_info.about_you%}
+
+ <div class="resume-group">
+
+ <div class="left-col"><p>ABOUT ME</p></div>
+
+ <div class="right-col">
+
+ <p>{{resume_info.about_you}}
+
+</p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+{% if resume_info.career %}
+
+<div class="resume-group"><div class="left-col">
+
+ <p>CAREER OBJECTIVES</p>
+
+</div>
+
+<div class="right-col">
+
+ <p>{{resume_info.career}}</p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+{% if resume_info.education %}
+
+<div class="resume-group">
+
+ <div class="left-col">
+
+ <p>EDUCATION</p>
+
+ </div>
+
+ <div class="right-col">
+
+ <p>{{resume_info.education}}</p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+<div class="resume-group">
+
+ <div class="left-col">
+
+ <p>EMPLOYMENT EXPERIENCE</p>
+
+ </div>
+
+ <div class="right-col">
+
+ <p></p>
+
+ </div>
+
+</div>
+
+{% if resume_info.job_1__start %}
+
+<div class="resume-group">
+
+ <div class="left-col">
+
+ <p>{{resume_info.job_1__start}} to {{resume_info.job_1__end}}</p>
+
+ </div>
+
+ <div class="right-col">
+
+ <p>{{resume_info.job_1__details}}
+
+</p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+{% if resume_info.job_2__start %}
+
+<div class="resume-group">
+
+ <div class="left-col">
+
+ <p>{{resume_info.job_2__start}} to {{resume_info.job_2__end}}</p>
+
+ </div>
+
+ <div class="right-col">
+
+ <p>{{resume_info.job_2__details}}
+
+</p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+{% if resume_info.job_3__start %}
+
+<div class="resume-group">
+
+ <div class="left-col">
+
+ <p>{{resume_info.job_3__start}} to {{resume_info.job_3__end}}</p>
+
+ </div>
+
+ <div class="right-col">
+
+ <p>{{resume_info.job_3__details}}
+
+</p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+<div class="resume-group">
+
+ <div class="left-col">
+
+ <p>REFERENCES</p>
+
+ </div>
+
+ <div class="right-col">
+
+ <p>{% if resume_info.references %}{{resume_info.references}}{% else %}Available upon request{% endif %}</p>
+
+ </div>
+
+</div>
+
+</div>
+
+<div class="instructions">Ctrl + P and "Save As PDF" to make a copy of this resume</div>
+
+</body>
+
+</html>
